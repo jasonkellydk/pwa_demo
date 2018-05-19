@@ -15,7 +15,7 @@ in this demo we will go through using React to display a fun little gif app and 
 
 ## Installation
 
-`js
+```js
 cd client
 npm install && npm run start
-`
+```
