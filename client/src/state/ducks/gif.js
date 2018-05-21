@@ -36,6 +36,7 @@ export function fetchGifs(type = 'random') {
  */
 const initialState = {
   gifs: [],
+  savedGifs: [],
   isLoading: false,
 };
 

@@ -5,9 +5,6 @@ import Infinite from 'react-infinite';
 import Card from './Card';
 
 export default class Cards extends Component {
-  onScroll = event => {
-    //event.preventDefault()
-  }
   render() {
     const { items, onEndReach, filter, onClick } = this.props;
 
@@ -25,7 +22,8 @@ export default class Cards extends Component {
             filteredItems
             ? filteredItems.map((gif, key) => 
               <Card
-                onClick={onClick}
+                onSave={() => console.log('saved')}
+                onDelete={() => console.log('deleted')}
                 title={gif.title}
                 key={key}
                 url={gif.images.original.url}

@@ -15,8 +15,18 @@ class Card extends Component {
     go(state)
   };
 
+  saveGif = go => {
+    this.props.onSave()
+    this.handleNextState(0, go)
+  }
+
+  removeGif = go => {
+    this.props.onDelete()
+    this.handleNextState(0, go)
+  }
+
   render() {
-    const { url, title, onClick } = this.props;
+    const { url, title, onSave, onDelete } = this.props;
     const { progress } = this.state;
 
     return (
@@ -28,7 +38,20 @@ class Card extends Component {
             url && (
               <div>
                 <img {...from('image')} onClick={() => this.handleNextState(1, go)} className="card__image" src={url} alt="gif" />
-                <img {...to('image')} onClick={() => this.handleNextState(0, go)} className="card__image card__image--large" src={url} alt="gif" />
+
+              <div {...to('image')} className="detail">
+                <img className="detail__image" src={url} alt="gif" onClick={() => this.handleNextState(0, go)} />
+                <h1 {...to('title')} className="detail__title" >{ title }</h1>
+
+                <div className="detail__buttons">
+                  <button className="detail__like" onClick={() => this.saveGif(go)}>
+                    <i className="icon ion-ios-heart-empty"></i>
+                  </button>
+                  <button className="detail__dislike" onClick={() => this.removeGif(go)}>
+                    <i className="icon ion-ios-close"></i>
+                  </button>
+                </div>
+              </div>
 
                 {
                   progress === 1 &&  (
@@ -38,7 +61,7 @@ class Card extends Component {
                 {
                   title !== '' && (
                     <div>
-                    <p className="card__title">{ title }</p>
+                    <p {...from('title')} className="card__title">{ title }</p>
                     </div>
                   )
                 }

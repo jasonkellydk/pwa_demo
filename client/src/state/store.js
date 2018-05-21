@@ -1,5 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import { offline } from '@redux-offline/redux-offline';
+import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
 import reducers from './ducks';
 
 export default function () {
@@ -8,7 +10,7 @@ export default function () {
   });
 
   const middlewares = [thunk];
-  const composeData = [applyMiddleware(...middlewares)];
+  const composeData = [applyMiddleware(...middlewares), offline(offlineConfig)];
 
   const isBrowser = typeof window !== 'undefined';
 
