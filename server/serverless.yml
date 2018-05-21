@@ -1,0 +1,23 @@
+service: giff-server
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: eu-west-1
+  environment:
+    SERVICE_NAME: ${self:service}
+plugins:
+  - serverless-webpack
+  - serverless-offline
+functions:
+  app:
+    handler: index.handler
+    events:
+     - http: ANY /
+     - http: 'ANY {proxy+}'
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: false
+    packager: 'npm'
